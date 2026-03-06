@@ -1,0 +1,44 @@
+{
+	"name": "SP_test",
+	"properties": {
+		"activities": [
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[param_trunc_tb]",
+					"storedProcedureParameters": {
+						"table_name": {
+							"value": {
+								"value": "@pipeline().parameters.tb_name",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_sqldb_durga",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"tb_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-02-22T15:37:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,9 @@
+{
+	"name": "adfdurga18",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "80553f1a-7f26-403c-a8f1-cad02e907eb3",
+		"tenantId": "7c79ecbd-dca2-4c52-a8fe-aa8806d772fb"
+	}
+}

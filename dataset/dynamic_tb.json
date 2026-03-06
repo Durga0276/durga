@@ -1,0 +1,25 @@
+{
+	"name": "dynamic_tb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_sqldb_durga",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tb_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DBO",
+			"table": {
+				"value": "@dataset().tb_name",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,127 @@
+{
+	"name": "Until_loop_test",
+	"properties": {
+		"description": "until have to run 3 times if file not found.",
+		"activities": [
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@or\r\n(\r\n    activity('Get Metadata1_copy1').output.exists,\r\nequal(variable('final_count'),2)\r\n)",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [
+								{
+									"activity": "Get Metadata1_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						},
+						{
+							"name": "Get Metadata1_copy1",
+							"type": "GetMetadata",
+							"dependsOn": [
+								{
+									"activity": "final_var",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "emp_sal_Ex",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"exists"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
+						},
+						{
+							"name": "temp_var",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "temp_count",
+								"value": {
+									"value": "@add(variables('final_count'),1)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "final_var",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "temp_var",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "final_count",
+								"value": {
+									"value": "@variables('temp_count')",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"timeout": "0.12:00:00"
+				}
+			}
+		],
+		"variables": {
+			"temp_count": {
+				"type": "Integer",
+				"defaultValue": 0
+			},
+			"final_count": {
+				"type": "Integer",
+				"defaultValue": 0
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-02-23T02:50:19Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,39 @@
+{
+	"name": "forloop_test",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.input_array",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 2
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"input_array": {
+				"type": "array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-02-22T11:54:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,23 @@
+{
+	"name": "emp_sal_Ex",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_storage_durga",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "emp_sal.xlsx",
+				"folderPath": "root/Source",
+				"fileSystem": "storage"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,76 @@
+{
+	"name": "Cp_parameterusage_tbllevel",
+	"properties": {
+		"activities": [
+			{
+				"name": "Cp_parameterusage",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "dynamic_tb",
+						"type": "DatasetReference",
+						"parameters": {
+							"tb_name": {
+								"value": "@pipeline().parameters.input_tb_name",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "dynamic_tb",
+						"type": "DatasetReference",
+						"parameters": {
+							"tb_name": {
+								"value": "@pipeline().parameters.output_tb_name",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"input_tb_name": {
+				"type": "string"
+			},
+			"output_tb_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-02-22T06:59:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
